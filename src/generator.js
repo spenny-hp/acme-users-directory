@@ -1,6 +1,12 @@
-const faker = require("faker");
-const users = new Array(50).fill("").map((_) => faker.helpers.userCard());
+const faker = require('faker');
 
-module.exports = {
-    users
-}
+const generate = ()=> {
+  const users = [];
+  const userList = document.querySelector('#user-list');
+  while(users.length < 50){
+    users.push(faker.helpers.userCard());
+  }
+  return users;
+};
+
+module.exports = generate;

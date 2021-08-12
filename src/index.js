@@ -1,20 +1,15 @@
-const { users } = require('./generator')
-const render = require('./renderer')
+const generator = require('./generator');
+const renderer = require('./renderer');
+const users = generator();
 
-// console.log(users)
+const userList = document.querySelector('#user-list');
 
-const userList = document.querySelector("#user-list");
+const render = ()=> {
+  renderer({ userList, users, hash: window.location.hash.slice(1) });
+};
 
-let currIndex = parseInt(window.location.hash.slice(1));
+window.addEventListener('hashchange', render);
+
+render();
 
 
-const _render = () => {
-    render({users, userList, currIndex});
-}
-
-_render();
-
-window.addEventListener('hashchange', ()=>{
-    currIndex = parseInt(window.location.hash.slice(1));
-    _render();
-})

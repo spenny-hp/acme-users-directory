@@ -1,27 +1,13 @@
-const render = (users, userList, currIndex) => {
-      const html = `${users
-        .map(
-          (user, ind) => `
-          <li>
-            <a href = '#${ind}'>${user.name}</a>
-            ${
-                currIndex === ind ? `
-                <div>
-                    ${ JSON.stringify(user, null, 2) }
-                </div>
-                ` : ``
-                
-                
-            }
-          </li>
-        `
-        )
-        .join("")}
-        `;
-    
-      userList.innerHTML = html;
-    };
+const render = ({ userList, hash, users })=> {
+  const html = users.map( (user, idx) => {
+    return `
+      <li>
+        <a href='#${idx}'>${ user.name }</a>
+        ${ parseInt(hash) === idx ? `<pre>${ JSON.stringify(user, null, 2)}</pre>` : ''}
+      </li>
+    `;
+  }).join('');
+  userList.innerHTML = html;
+};
 
-    module.exports = {
-        render
-    }
+module.exports = render;
